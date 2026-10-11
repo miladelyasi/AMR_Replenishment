@@ -1,0 +1,42 @@
+{
+  "status": "Research reproduction package prepared for author upload to GitHub",
+  "title": "Code and simulation data for Shielded Rolling-Horizon Optimization for Autonomous Mobile Robot Line-Side Replenishment in Robotic Compact Storage and Retrieval Systems",
+  "author": {
+    "name": "Milad Elyasi",
+    "affiliation": "Industrial Engineering Department, Özyeğin University",
+    "contact_email": "milad.elyasi@ozyegin.edu.tr"
+  },
+  "subject": "Engineering",
+  "keywords": [
+    "robotic compact storage and retrieval systems",
+    "autonomous mobile robots",
+    "line-side replenishment",
+    "mixed-integer linear programming",
+    "multi-agent path finding",
+    "simulation",
+    "reproducibility"
+  ],
+  "description": "Simulation code, instance configurations, seed-level outputs, per-epoch diagnostics, and statistical analyses for shielded rolling-horizon AMR replenishment. The schedule-based benchmark comprises 1,700 executions, including 30 identified BatchGreedy timing replays. The complete Absolute screening and fixed-weight analysis uses 210 records: 165 new executions and 45 reused stopping-study records. Service-event learning diagnostics are supplied as a separate dataset and are not pooled with the schedule-based benchmark.",
+  "data_origin": "Synthetic simulation; no industrial trace data or participant data",
+  "related_manuscript_journal": "Flexible Services and Manufacturing Journal",
+  "repository_target": "GitHub",
+  "persistent_identifier": null,
+  "code_license_metadata": "MIT as declared in the supplied pyproject.toml",
+  "dataset_license": null,
+  "version": "1.0.0",
+  "repository_url": "https://github.com/miladelyasi/AMR_Replenishment",
+  "primary_episodes": 1215,
+  "technical_validation_episodes": 65,
+  "additional_validation_episodes": 105,
+  "stopping_validation_episodes": 90,
+  "same_state_shadow_comparisons": 720,
+  "accurate_dispatch_executions": 60,
+  "accurate_dispatch_new_absolute_episodes": 30,
+  "accurate_dispatch_batch_timing_replays": 30,
+  "total_reported_executions": 1700,
+  "joint_stopping_new_executions": 165,
+  "complete_absolute_screening_records": 150,
+  "complete_absolute_screening_new_executions": 105,
+  "complete_absolute_screening_reused_executions": 45,
+  "joint_weight_new_executions": 60
+}

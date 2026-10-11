@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "Please cite this repository and identify the version or commit used."
+type: software
+title: "AMR Replenishment: code and simulation data for shielded rolling-horizon optimization"
+authors:
+  - family-names: Elyasi
+    given-names: Milad
+    affiliation: "Özyeğin University"
+version: "1.0.0"
+repository-code: "https://github.com/miladelyasi/AMR_Replenishment"
+url: "https://github.com/miladelyasi/AMR_Replenishment"
+abstract: "Code, configurations, simulation outputs, statistical analyses, and experiment source snapshots for a rolling-horizon AMR replenishment benchmark comprising 1,700 executions, including 30 timing replays. Separate service-event learning diagnostics are also provided."
+keywords:
+  - autonomous mobile robots
+  - line-side replenishment
+  - robotic compact storage
+  - mixed-integer programming
+  - multi-agent path finding

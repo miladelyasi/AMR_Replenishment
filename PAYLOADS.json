@@ -1,0 +1,25 @@
+{
+  "documents": [
+    "README.md",
+    "metadata.json",
+    "environment.json",
+    "CITATION.cff"
+  ],
+  "archives": [
+    "source_code.zip",
+    "simulation_data_01.zip",
+    "simulation_data_02.zip",
+    "simulation_data_03.zip",
+    "simulation_data_04.zip",
+    "simulation_data_05.zip",
+    "simulation_data_06.zip",
+    "simulation_data_07.zip",
+    "simulation_data_08.zip",
+    "simulation_data_09.zip",
+    "simulation_data_10.zip",
+    "simulation_data_11.zip",
+    "analysis_outputs.zip",
+    "experiment_sources.zip",
+    "validation_checks.zip"
+  ]
+}
