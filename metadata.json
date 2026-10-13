@@ -38,5 +38,10 @@
   "complete_absolute_screening_records": 150,
   "complete_absolute_screening_new_executions": 105,
   "complete_absolute_screening_reused_executions": 45,
-  "joint_weight_new_executions": 60
+  "joint_weight_new_executions": 60,
+  "auxiliary_selection_seed": 4,
+  "auxiliary_selection_epochs": 3567,
+  "auxiliary_selection_pairs": 1769546,
+  "auxiliary_selected_pairs": 5295,
+  "auxiliary_selection_scope": "Recorded feature inputs, selected-pair labels, normalization parameters, trained checkpoint, and evaluator support the offline coverage table. This dataset is excluded from the 1,700 schedule-based executions."
 }

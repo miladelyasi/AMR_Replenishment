@@ -16,7 +16,7 @@ Download the repository using **Code → Download ZIP**, extract it, and keep th
 python3 unpack.py
 ```
 
-The script uses the Python standard library, verifies the upload checksums, restores `research_reproduction/`, and verifies every restored file. Allow approximately 1.2 GB for the restored material in addition to the downloads. An existing destination is accepted only when its files match the package. To choose a destination, use `python3 unpack.py --output PATH`.
+The script uses the Python standard library, verifies the upload checksums, restores `research_reproduction/`, and verifies every restored file. Allow 2 GiB for the restored material in addition to the downloads. An existing destination is accepted only when its files match the package. To choose a destination, use `python3 unpack.py --output PATH`.
 
 Alternatively:
 
@@ -39,6 +39,7 @@ To inspect results without running the simulator, begin with `research_reproduct
 | `data/stopping/` | 90 full-episode stopping-policy comparisons, solver gaps, line allocation, timing, and 720 shadow dispatch comparisons |
 | `data/accurate_dispatch/` | 30 Absolute MILP episodes and 30 BatchGreedy timing replays at fixed comparator settings |
 | `data/joint_stopping/` | 165 executions for complete Absolute screening and fixed cross-preset weights; its analysis also uses 45 stopping-study records |
+| `data/learning_selection/` | Recorded seed-4 pair features and MILP selection labels, normalization parameters, and trained checkpoint for the separate offline coverage diagnostic |
 | `analysis/` | Episode summaries, paired contrasts, audit summaries, and generated tables and figures; named subdirectories correspond to the experiment groups |
 | `analysis/learning/` | Separate service-event learning diagnostics |
 | `extension_checks/` | Short functional checks, independently checked tactical decisions, and port-layout checks, excluded from experiment totals |
@@ -67,7 +68,7 @@ BatchGreedy timing replays repeat the operational outcomes of the corresponding 
 
 ## Set up the simulator
 
-The recorded experiment environment uses Python 3.13.7, Gurobi 13.0.2, an AMD Ryzen 9 9950X3D processor, eight visible CPU cores, and approximately 62.3 GB of visible memory. MILP episodes use one solver thread each. See `environment.json` for the package versions and source inventories.
+The recorded experiment environment uses Python 3.13.7, Gurobi 13.0.2, an AMD Ryzen 9 9950X3D processor, eight visible logical processors, and approximately 59 GiB of visible memory. MILP episodes use one solver thread each. See `environment.json` for the package versions and source inventories.
 
 From `research_reproduction/code/`:
 
@@ -179,15 +180,18 @@ The manifest specifies all 210 analysis cells, the 165 additional executions, th
 The manuscript's learning appendix uses a separate service-event simulation model. Its source, output CSVs, and checkpoints are supplied in `provenance/service_event_code/`, `provenance/service_event_results/`, and `provenance/learning_checkpoints.tar.gz`. It is not a learned-controller comparison under `ScheduleSimulator`.
 
 ```bash
+python experiments/analyze_selection_coverage.py \
+  --data ../data/learning_selection --out ../analysis/learning
 python experiments/analyze_learning_f1.py \
   --learning-results ../provenance/service_event_results \
+  --coverage ../analysis/learning/selection_coverage.csv \
   --out ../analysis/learning
 python experiments/analyze_learning_f2.py \
   --learning-results ../provenance/service_event_results \
   --out ../analysis/learning
 ```
 
-Closed-loop outcomes and paired intervals are regenerated from seed-level records. Offline selection-coverage values are transcribed from the manuscript table and identified as reported values; training data sufficient to regenerate those coverage measurements are not included. The diagnostics do not identify the cause of score collapse or establish learning performance under the schedule-based benchmark.
+Closed-loop outcomes and paired intervals are regenerated from seed-level records. The offline evaluator loads the recorded seed-4 pair features, original feature normalization, and trained checkpoint from `data/learning_selection/`. Input shards preserve the original JSONL records and their order; its manifest checks their individual hashes and the concatenated source hash. Coverage pools retained selected pairs over all nonempty decision epochs, using the recorded MILP selections as labels. The random comparator uses seed 0. The evaluator writes exact coverage ratios and per-epoch counts; the plot uses the manuscript's three-decimal coverage values. This computation evaluates the supplied checkpoint without retraining. It requires NumPy and PyTorch. The diagnostics do not identify the cause of score collapse or establish learning performance under the schedule-based benchmark.
 
 ## Output fields and interpretation
 
