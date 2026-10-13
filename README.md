@@ -173,7 +173,7 @@ python experiments/analyze_joint_stopping.py \
   --reference ../data/primary --out ../analysis/joint_stopping
 ```
 
-The manifest specifies all 210 analysis cells, the 165 additional executions, the 45 reused records, objective coefficients, and stopping tolerances. `episodes.csv` identifies reuse explicitly. Screening comparisons use 30 paired seeds at reference weights; fixed-weight comparisons use seeds 0–14 at both weights. These are exploratory matched comparisons. The analysis checks complete raw inputs, battery and execution invariants, and achieved solver gaps before writing estimates.
+The manifest specifies all 210 analysis cells, the 165 additional executions, the 45 reused records, objective coefficients, and stopping tolerances. `episodes.csv` identifies reuse explicitly. Screening comparisons use 30 paired seeds at reference weights; fixed-weight comparisons use seeds 0–14 at both weights. These are exploratory matched comparisons. The analysis checks complete raw inputs, battery and execution invariants, and achieved solver gaps before writing estimates. `screening_summary.csv` and `screening_table.tex` report all five presets and both stopping policies on the same 30 seeds, including buffer-accepted and overflow units.
 
 ## Learning diagnostics
 
@@ -191,11 +191,11 @@ python experiments/analyze_learning_f2.py \
   --out ../analysis/learning
 ```
 
-Closed-loop outcomes and paired intervals are regenerated from seed-level records. The offline evaluator loads the recorded seed-4 pair features, original feature normalization, and trained checkpoint from `data/learning_selection/`. Input shards preserve the original JSONL records and their order; its manifest checks their individual hashes and the concatenated source hash. Coverage pools retained selected pairs over all nonempty decision epochs, using the recorded MILP selections as labels. The random comparator uses seed 0. The evaluator writes exact coverage ratios and per-epoch counts; the plot uses the manuscript's three-decimal coverage values. This computation evaluates the supplied checkpoint without retraining. It requires NumPy and PyTorch. The diagnostics do not identify the cause of score collapse or establish learning performance under the schedule-based benchmark.
+Closed-loop outcomes and paired intervals are regenerated from seed-level records. The offline evaluator loads the recorded seed-4 pair features, original feature normalization, and trained checkpoint from `data/learning_selection/`. Input shards preserve the original JSONL records and their order; its manifest checks their individual hashes and the concatenated source hash. Coverage pools retained selected pairs over all nonempty decision epochs, using the recorded MILP selections as labels. The random comparator uses seed 0. The evaluator writes exact coverage ratios and per-epoch counts; the plot uses the manuscript's three-decimal coverage values. This computation evaluates the supplied checkpoint without retraining. The training pair sets needed to reproduce checkpoint fitting are outside the package's scope. It requires NumPy and PyTorch. The diagnostics do not identify the cause of score collapse or establish learning performance under the schedule-based benchmark.
 
 ## Output fields and interpretation
 
-Episode JSONs identify configuration, overrides, method, and random seed. Design manifests define the episode IDs, groups, presets, and policy settings. Preset labels are not counts of robot–job pairs. The benchmark retains one earliest start per feasible pair; currently idle eligible robots use slot zero.
+Episode JSONs identify configuration, overrides, method, and random seed. Design manifests define the episode IDs, groups, presets, and policy settings. Preset labels are not counts of robot–job pairs. The benchmark fixes start slot zero for each pair of a currently idle eligible robot and a screened job; alternatives must pass the individual feasibility checks.
 
 | Field | Definition or unit |
 |---|---|
